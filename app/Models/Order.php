@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Order extends Model
+{
+    use HasFactory;
+
+    public function comments(){
+        return $this->hasMany('App\Models\Comment');
+     }
+
+     public function photos(){
+         return $this->hasMany('App\Models\Photo');
+     }
+ }
+
