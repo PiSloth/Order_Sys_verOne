@@ -310,9 +310,9 @@
                         @endif>Request</button>
                     @endif
 
-                    @if (in_array($user->id, [1,2]) && $order['status_id'] === 3)
+                    @if (in_array($user->id, [1,2,3]) && $order['status_id'] === 3)
                         <button name="action" class="btn btn-warning" type="submit" value="approve"
-                        @if ($user->id !== 2 && $user->id !== 1)
+                        @if ($user->id !== 2 && $user->id !== 1 && $user->id !== 3)
                             disabled
                         @endif>Approve</button>
                     @endif

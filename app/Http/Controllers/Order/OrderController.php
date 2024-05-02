@@ -92,22 +92,22 @@ class OrderController extends Controller
 
     public function create(){
 
-        $validator = validator(request()->all(),[
-            'category' => 'required',
-            'design' => 'required',
-            'detail' => 'required',
-            'quality' => 'required',
-            'weight' => 'required',
-            'size' => 'required',
-            'qty' => 'required',
-            'grade' => 'required',
-            'counterstock' => 'required',
-            'note' => 'required',
-        ]);
+        // $validator = validator(request()->all(),[
+        //     'category' => 'required',
+        //     'design' => 'required',
+        //     'detail' => 'required',
+        //     'quality' => 'required',
+        //     'weight' => 'required',
+        //     'size' => 'required',
+        //     'qty' => 'required',
+        //     'grade' => 'required',
+        //     'counterstock' => 'required',
+        //     'note' => 'required',
+        // ]);
 
-        if($validator->fails()){
-            return back()->withErrors($validator);
-        }
+        // if($validator->fails()){
+        //     return back()->withErrors($validator);
+        // }
 
         $order = new Order();
         $order->category = request()->category;
@@ -154,7 +154,7 @@ class OrderController extends Controller
     // if ($image->orderimg) {
     //     $imagePath = asset('storage/' . $image->orderimg);
     // }
-
+        // dd("Hello");
         $user = Auth::user();
         $data = Order::find($id);
         return view('orders.view',[
@@ -189,15 +189,17 @@ class OrderController extends Controller
                 //for approver status code - 4 (approved)
                 // Stats id and Qty only can edit! (2 types of data)
             case 'approve':
-                    $data = Order::find(request()->id);
-                    // $data-> status_id = 4;
-                    if(request()->available < 1){
-                        $status_code = 8;
-                    }else {
-                        $status_code = 4;
+                $data = Order::find(request()->id);
+                // $data-> status_id = 4;
+                if(request()->available < 1){
+                    $status_code = 8;
+                }else {
+                    $status_code = 4;
+                    // dd(request()->avaliable);
                     }
                     $data-> status_id = $status_code;
-                    $data-> qty = request()->qty;
+                    $data-> qty = 0;
+                    // dd( $status_code );
                     $data->save();
                     return back();
 
